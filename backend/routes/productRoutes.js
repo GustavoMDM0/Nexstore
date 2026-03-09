@@ -6,10 +6,13 @@ const Product = require('../models/Product');
 router.get('/stats/dashboard', async (req, res) => {
   try {
     const products = await Product.find();
+    const Sale = require('../models/Sale'); // Precisamos importar o model de vendas aqui
+    const sales = await Sale.find();
+
     let totalStockValue = 0;
     let lowStockCount = 0;
-    const totalProducts = products.length;
-
+    
+    // Cálculo de Estoque
     products.forEach(product => {
       totalStockValue += (product.sellPrice * product.currentStock);
       if (product.currentStock <= product.minStock) {
@@ -17,7 +20,15 @@ router.get('/stats/dashboard', async (req, res) => {
       }
     });
 
-    res.json({ totalProducts, totalStockValue, lowStockCount });
+    // Cálculo de Faturamento (Vendas do Mês)
+    const monthlyRevenue = sales.reduce((acc, curr) => acc + (curr.totalPrice || 0), 0);
+
+    res.json({ 
+      totalProducts: products.length, 
+      totalStockValue, 
+      lowStockCount,
+      monthlyRevenue 
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
