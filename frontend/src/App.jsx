@@ -13,9 +13,8 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-slate-50 overflow-x-hidden">
+      <div className="flex min-h-screen bg-slate-50">
         
-        {}
         <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0f172a] flex items-center justify-between px-6 z-50 border-b border-slate-800 shadow-md">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
@@ -34,8 +33,7 @@ function App() {
 
         <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-        {}
-        <main className="flex-1 w-full pt-16 lg:pt-0 lg:ml-0 overflow-x-hidden">
+        <main className="flex-1 min-w-0 pt-16 lg:pt-0">
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
