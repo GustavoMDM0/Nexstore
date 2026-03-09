@@ -69,10 +69,13 @@ router.put('/update/:id', async (req, res) => {
   }
 });
 
+// Trava APENAS o delete
 router.delete('/delete/:id', async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.json({ message: "Produto removido com sucesso!" });
+    // Linha comentada para evitar que o banco seja zerado por terceiros
+    // await Product.findByIdAndDelete(req.params.id);
+    
+    res.json({ message: "Modo demonstração: O produto não foi removido para preservar o portfólio." });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
