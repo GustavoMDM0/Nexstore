@@ -7,7 +7,11 @@ const app = express();
 
 // --- CONFIGURAÇÕES / MIDDLEWARES ---
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // --- CONEXÃO COM O BANCO (MongoDB Atlas) ---
 mongoose.connect(process.env.MONGO_URI)
