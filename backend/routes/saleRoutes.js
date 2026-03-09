@@ -22,12 +22,16 @@ router.post('/checkout', async (req, res) => {
       totalPrice: totalSalePrice
     });
 
-    product.currentStock -= quantity;
+    // Lógica de alteração de estoque comentada para proteção de dados do portfólio
+    // product.currentStock -= quantity;
+    // await product.save();
 
     await newSale.save();
-    await product.save();
 
-    res.status(201).json({ message: "Venda realizada com sucesso!", sale: newSale });
+    res.status(201).json({ 
+      message: "Venda realizada com sucesso! (Modo de Demonstração: Estoque preservado)", 
+      sale: newSale 
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -61,5 +65,10 @@ router.post('/log-activity', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Rota de DELETE desabilitada para evitar perda de dados por usuários externos
+// router.delete('/:id', (req, res) => {
+//   res.status(403).json({ message: "A exclusão de registros está desabilitada nesta versão de teste." });
+// });
 
 module.exports = router;
