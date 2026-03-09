@@ -2,17 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-// *** ROTA DE ESTATÍSTICAS ***
 router.get('/stats/dashboard', async (req, res) => {
   try {
     const products = await Product.find();
-    const Sale = require('../models/Sale'); // Precisamos importar o model de vendas aqui
+    const Sale = require('../models/Sale');
     const sales = await Sale.find();
 
     let totalStockValue = 0;
     let lowStockCount = 0;
     
-    // Cálculo de Estoque
     products.forEach(product => {
       totalStockValue += (product.sellPrice * product.currentStock);
       if (product.currentStock <= product.minStock) {
@@ -20,7 +18,6 @@ router.get('/stats/dashboard', async (req, res) => {
       }
     });
 
-    // Cálculo de Faturamento (Vendas do Mês)
     const monthlyRevenue = sales.reduce((acc, curr) => acc + (curr.totalPrice || 0), 0);
 
     res.json({ 
@@ -34,8 +31,6 @@ router.get('/stats/dashboard', async (req, res) => {
   }
 });
 
-
-// 1. ADICIONAR (Create)
 router.post('/add', async (req, res) => {
   try {
     const newProduct = new Product(req.body);
@@ -46,7 +41,6 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// 2. VER TODOS (Read)
 router.get('/all', async (req, res) => {
   try {
     const products = await Product.find();
@@ -56,7 +50,6 @@ router.get('/all', async (req, res) => {
   }
 });
 
-// 3. BUSCAR UM ESPECÍFICO (Read by ID)
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -67,7 +60,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// 4. EDITAR (Update)
 router.put('/update/:id', async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -77,7 +69,6 @@ router.put('/update/:id', async (req, res) => {
   }
 });
 
-// 5. DELETAR (Delete)
 router.delete('/delete/:id', async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
