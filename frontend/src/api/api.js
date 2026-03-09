@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://nexstore-tz6u.onrender.com/api', 
-  timeout: 30000, // 30 segundos de espera
+  baseURL: import.meta.env.VITE_API_URL, 
+  timeout: 30000,
 });
 
 export default api;
