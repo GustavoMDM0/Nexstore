@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
   costPrice: { type: Number, required: true },
   sellPrice: { type: Number, required: true },
   currentStock: { type: Number, default: 0 },
-  minStock: { type: Number, default: 2 },
+  minStock: { type: Number, default: 1 },
   createdAt: { type: Date, default: Date.now }
 });
 

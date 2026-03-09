@@ -49,4 +49,26 @@ router.get('/history', async (req, res) => {
   }
 });
 
+
+// Rota para registrar movimentações manuais (Entradas ou Ajustes)
+router.post('/log-activity', async (req, res) => {
+  try {
+    const { productId, productName, quantity, type, note } = req.body;
+    
+    const newLog = new Sale({
+      product: productId,
+      productName: productName,
+      quantity: quantity, // Pode ser positivo para entrada
+      totalPrice: 0, // Entrada manual não gera faturamento de venda
+      soldAt: new Date(),
+      note: note || "Ajuste de estoque" 
+    });
+
+    await newLog.save();
+    res.status(201).json({ message: "Movimentação registrada!" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
