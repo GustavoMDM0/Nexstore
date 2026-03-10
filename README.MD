@@ -30,8 +30,8 @@ O **Nexstore** é uma plataforma robusta desenvolvida para a **EletroCelo** gere
 ### 🚀 Próximos Passos
 - [x] Desenvolvimento da API Base (Backend)
 - [x] Integração com MongoDB Atlas
-- [ ] Desenvolvimento da Interface Web (React + Tailwind)
-- [ ] Deploy Produção (Render)
+- [x] Desenvolvimento da Interface Web (React + Tailwind)
+- [x] Deploy Produção (Render)
 
 ---
 
@@ -40,4 +40,5 @@ O **Nexstore** é uma plataforma robusta desenvolvida para a **EletroCelo** gere
 <a href="https://www.linkedin.com/in/gustavo-medeiros-0185602b2/" target="blank"><img align="center" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 <a href="https://github.com/GustavoMDM0" target="blank"><img align="center" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
 </p>
+
 
